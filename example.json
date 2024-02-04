@@ -1,0 +1,11 @@
+{
+  "site": {
+    "exact": true,
+    "overwrite": false,
+    "enabled": true,
+    "params": {
+      "key": "value",
+      "key2": "value"
+    }
+  }
+}
