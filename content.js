@@ -2,7 +2,7 @@ chrome.storage.local.get(["data"], (item) => {
   data = item.data || {}
   
   const currentUrl = window.location.href
-  const parsedUrl= new URL(currentUrl)
+  const parsedUrl = new URL(currentUrl)
 
   const entry = Object.entries(data).find((item) => {
     const [key, val] = item 
@@ -11,9 +11,9 @@ chrome.storage.local.get(["data"], (item) => {
 
     const parsedTarget = new URL(key)
 
-    if(parsedUrl.origin !== parsedTarget.origin) return
+    if(parsedUrl.origin !== parsedTarget.origin) return false
 
-    if(val.exact) return parsedUrl.pathname === parsedTarget.pathname;
+    if(val.exact) return parsedUrl.pathname === parsedTarget.pathname
 
     return parsedUrl.hostname.includes(parsedTarget.hostname)
   })  
@@ -21,7 +21,6 @@ chrome.storage.local.get(["data"], (item) => {
   if(!entry) return
 
   const config = entry[1]
-
   let result = currentUrl
 
   Object.entries(config.params).forEach((item) => {
@@ -32,10 +31,9 @@ chrome.storage.local.get(["data"], (item) => {
       if(!config.overwrite) return
 
       const parsed = new URL(result)
+
       parsed.searchParams.set(name, value)
-
       result = parsed.toString()
-
       return
     }
 
@@ -45,7 +43,7 @@ chrome.storage.local.get(["data"], (item) => {
   })
 
   if(result !== currentUrl) {
-    window.history.replaceState({}, document.title, result);
+    window.history.replaceState({}, document.title, result)
     location.reload()
   }
 })
