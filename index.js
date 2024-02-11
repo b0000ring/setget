@@ -26,7 +26,7 @@ function render() {
   const interface = document.createElement('div');
 
   const input = document.createElement('input');
-  input.placeholder = 'https://example.com/path';
+  input.placeholder = 'http://localhost:1313/path';
   input.id = 'add_input';
 
   const add = document.createElement('button');
@@ -86,7 +86,7 @@ function renderResource(data) {
 
   const addRuleWrapper = document.createElement('div')
   addRuleWrapper.className = 'rule-new'
-  
+
   const newRule = document.createElement('div')
   newRule.className = 'rule-new-form'
 
