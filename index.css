@@ -47,6 +47,11 @@ header h3 {
   margin-right: 8px;
 }
 
+.resource-name {
+  word-wrap: break-word;
+  max-width: 80%;
+}
+
 .resource-name-wrapper {
   display: flex;
   justify-content: space-between;
@@ -89,13 +94,26 @@ header h3 {
   display: flex;
   font-size: 16px;
   margin: 18px 0px;
-  width: 198px;
+  width: 80%;
   justify-content: space-between;
   align-items: center;
 }
 
+.resource .rules .rule div:first-child {
+  word-break: break-word;
+  max-width: 65%;
+}
+
 .rule-new {
   margin-top: 32px;
+}
+
+.rule-new div:first-child {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.rule-new-form {
   display: flex;
   align-items: center;
 }

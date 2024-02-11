@@ -12,30 +12,30 @@ function init() {
 }
 
 function render() {
-  const root = document.querySelector('#root')
-  root.innerHTML = ''
+  const root = document.querySelector('#root');
+  root.innerHTML = '';
 
-  const result = Object.entries(data).map(renderResource)
+  const resources = Object.entries(data).map(renderResource);
 
-  const wrapper = document.createElement('div')
-  wrapper.className= 'resource-new'
+  const wrapper = document.createElement('div');
+  wrapper.className = 'resource-new';
 
-  const title = document.createElement('div')
-  title.textContent = 'Add resource'
+  const title = document.createElement('div');
+  title.textContent = 'Add resource';
 
-  const interface = document.createElement('div')
+  const interface = document.createElement('div');
 
-  const input = document.createElement('input')
-  input.placeholder = 'https://example.com/path'
-  input.id = 'add_input'
+  const input = document.createElement('input');
+  input.placeholder = 'https://example.com/path';
+  input.id = 'add_input';
 
-  const add = document.createElement('button')
-  add.innerHTML = 'Add'
-  add.addEventListener('click', addResource)
+  const add = document.createElement('button');
+  add.textContent = 'Add';
+  add.addEventListener('click', addResource);
 
-  interface.append(input, add)
-  wrapper.append(title, interface)
-  root.append(...result, wrapper)
+  interface.append(input, add);
+  wrapper.append(title, interface);
+  root.append(...resources, wrapper);
 }
 
 function toggleParam(resource, param) {
@@ -52,6 +52,7 @@ function renderResource(data) {
   nameWrapper.className = 'resource-name-wrapper'
 
   const name = document.createElement('div')
+  name.className = 'resource-name'
   name.innerHTML = key
 
   const interface = document.createElement('div')
@@ -83,8 +84,14 @@ function renderResource(data) {
 
   const rules = Object.entries(d.params).map((item) => renderRule(key, item))
 
+  const addRuleWrapper = document.createElement('div')
+  addRuleWrapper.className = 'rule-new'
+  
   const newRule = document.createElement('div')
-  newRule.className = 'rule-new'
+  newRule.className = 'rule-new-form'
+
+  const ruleTitle = document.createElement('div')
+  ruleTitle.textContent = 'Add rule';
 
   const param = document.createElement('input')
   param.placeholder = 'param'
@@ -98,10 +105,11 @@ function renderResource(data) {
   add.innerHTML = 'Add'
   add.addEventListener('click', () => addRule(key))
 
+  newRule.append(ruleTitle, param, value, add)
   buttons.append(enabled)
   d.enabled && buttons.append(exact, overwrite)
-  d.enabled && newRule.append(param, value, add)
-  d.enabled && rulesWrapper.append(...rules, newRule)
+  d.enabled && addRuleWrapper.append(ruleTitle, newRule)
+  d.enabled && rulesWrapper.append(...rules, addRuleWrapper)
   nameWrapper.append(name, remove)
   interface.append(buttons)
   resource.append(nameWrapper, interface, rulesWrapper)
