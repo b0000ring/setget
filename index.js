@@ -29,6 +29,8 @@ function render() {
   input.placeholder = 'http://localhost:1313/path';
   input.id = 'add_input';
 
+  addEnterPressSupport(input, addResource)
+
   const add = document.createElement('button');
   add.textContent = 'Add';
   add.addEventListener('click', addResource);
@@ -96,10 +98,12 @@ function renderResource(data) {
   const param = document.createElement('input')
   param.placeholder = 'param'
   param.id = `${key}_param`
+  addEnterPressSupport(param, () => addRule(key))
 
   const value = document.createElement('input')
   value.placeholder = 'value'
   value.id = `${key}_value`
+  addEnterPressSupport(value, () => addRule(key))
 
   const add = document.createElement('button')
   add.innerHTML = 'Add'
@@ -168,6 +172,14 @@ function removeSource(source) {
 function apply() {
   setData()
   render()
+}
+
+function addEnterPressSupport(input, cb) {
+  input.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter') {
+      cb()
+    }
+  })
 }
 
 function loadConfig() {

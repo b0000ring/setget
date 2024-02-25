@@ -42,7 +42,7 @@ header h3 {
 
 .resource {
   background: var(--third);
-  padding: 16px 8px 32px 8px;
+  padding: 16px 0px 32px 0px;
   border-bottom: 1px solid #a0b3b0;
   margin-right: 8px;
 }
